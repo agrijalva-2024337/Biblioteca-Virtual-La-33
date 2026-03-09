@@ -1,0 +1,63 @@
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Application.deps.json
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Application.dll
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Application.pdb
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Domain.dll
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Domain.pdb
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.csproj.AssemblyReference.cache
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.AssemblyInfoInputs.cache
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.AssemblyInfo.cs
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.csproj.CoreCompileInputs.cache
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.sourcelink.json
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthServ.67992DEE.Up2Date
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.dll
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\obj\Debug\net8.0\refint\AuthService.Application.dll
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.pdb
+C:\Users\diego\Desktop\Tareas\Taller\FoodLine\auth-service\src\AuthService.Application\obj\Debug\net8.0\ref\AuthService.Application.dll
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Application.deps.json
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Application.dll
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Application.pdb
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Domain.dll
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Domain.pdb
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.csproj.AssemblyReference.cache
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.AssemblyInfoInputs.cache
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.AssemblyInfo.cs
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.csproj.CoreCompileInputs.cache
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.sourcelink.json
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthServ.67992DEE.Up2Date
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.dll
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\refint\AuthService.Application.dll
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.pdb
+C:\Users\Informatica\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\ref\AuthService.Application.dll
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Application.deps.json
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Application.dll
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Application.pdb
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Domain.dll
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Domain.pdb
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.csproj.AssemblyReference.cache
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.AssemblyInfoInputs.cache
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.AssemblyInfo.cs
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.csproj.CoreCompileInputs.cache
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.sourcelink.json
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthServ.67992DEE.Up2Date
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.dll
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\refint\AuthService.Application.dll
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.pdb
+C:\Users\kikec\Documents\Biblioteca-Virtual-La-33\auth-service\src\AuthService.Application\obj\Debug\net8.0\ref\AuthService.Application.dll
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Application.deps.json
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Application.dll
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Application.pdb
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Domain.dll
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\bin\Debug\net8.0\AuthService.Domain.pdb
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.csproj.AssemblyReference.cache
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.AssemblyInfoInputs.cache
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.AssemblyInfo.cs
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.csproj.CoreCompileInputs.cache
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthServ.67992DEE.Up2Date
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.dll
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\obj\Debug\net8.0\refint\AuthService.Application.dll
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\obj\Debug\net8.0\AuthService.Application.pdb
+C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Application\obj\Debug\net8.0\ref\AuthService.Application.dll

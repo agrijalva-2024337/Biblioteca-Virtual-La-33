@@ -156,6 +156,15 @@ Base URL: `https://localhost:5001/api/v1`
 
 ### Endpoints (Servicio de Notificaciones)
 
+Base path: `/Biblioteca/v1/notifications`
+
+| Método | Ruta | Auth | Descripción |
+|--------|------|------|-------------|
+| POST | `/send` | No | Enviar email genérico (to, subject, html/text). Lo puede llamar Auth u otros servicios. |
+| POST | `/send-template` | No | Enviar por plantilla: `welcome`, `verify-email`, `reset-password`, `generic`. Body: `to`, `template`, `data` (ej. `username`, `token`). |
+| GET | `/` | JWT | Listar notificaciones del usuario (paginado: `page`, `limit`, `type`). |
+| GET | `/:id` | JWT | Obtener una notificación por ID. |
+| PATCH | `/:id/read` | JWT | Marcar notificación como leída. |
 
 
 ## Autores

@@ -1,65 +1,16 @@
 services:
-
-  mongodb:
-    image: mongo:7
-    container_name: biblioteca_33_mongo
+  postgres:
+    image: postgres:13
+    container_name: biblioteca_postgres
+    environment:
+      POSTGRES_USER: BIBLIOTECA
+      POSTGRES_PASSWORD: biblioteca33!
+      POSTGRES_DB: biblioteca_virtual_33_db
     ports:
-      - "27017:27017"
+      - "5436:5432"
     volumes:
-      - mongo_data:/data/db
-
-  mongo-express:
-    image: mongo-express
-    ports:
-      - "8081:8081"
-    environment:
-      - ME_CONFIG_MONGODB_SERVER=mongodb
-    depends_on:
-      - mongodb
-
-  auth-service:
-    build: ./auth-service
-    ports:
-      - "5000:8080"
-    environment:
-      - JWT_SECRET=${JWT_SECRET}
-      - MONGO_URI=${MONGO_URI}/auth_db
-    depends_on:
-      - mongodb
-
-  files-service:
-    build: ./files-service
-    ports:
-      - "3002:3002"
-    environment:
-      - JWT_SECRET=${JWT_SECRET}
-      - MONGO_URI=${MONGO_URI}/files_db
-    depends_on:
-      - mongodb
-
-  ai-service:
-    build: ./ai-service
-    ports:
-      - "3003:3003"
-    environment:
-      - JWT_SECRET=${JWT_SECRET}
-      - MONGO_URI=${MONGO_URI}/ai_db
-    depends_on:
-      - mongodb
-
-  moderation-service:
-    build: ./moderation-service
-    ports:
-      - "3005:3005"
-    environment:
-      - JWT_SECRET=${JWT_SECRET}
-
-  notification-service:
-    build: ./notification-service
-    ports:
-      - "3006:3006"
-    environment:
-      - JWT_SECRET=${JWT_SECRET}
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
 
 volumes:
-  mongo_data:
+  postgres_data:s

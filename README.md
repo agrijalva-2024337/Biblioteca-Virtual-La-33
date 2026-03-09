@@ -144,6 +144,16 @@ Base URL: `https://localhost:5001/api/v1`
 
 ### Endpoints (Servicio de Moderacion)
 
+### Moderaciones
+| Metodo | Endpoint | Descripcion | Auth requerida |
+|--------|----------|-------------|----------------|
+| `GET` | `/moderations`| Obtener todas las moderaciones | JWT |
+| `GET` | `/moderations/{id}`| Obtener una moderacion por ID | JWT |
+| `POST` | `/moderations` | Crear una nueva solicitud de moderacion | JWT |
+| `PATCH` | `/moderations/{id}/approve` | Aprobar una moderacion | Admin |
+| `PATCH` | `/moderations/{id}/reject` | Rechazar una moderacion | Admin |
+
+
 ### Endpoints (Servicio de Notificaciones)
 
 

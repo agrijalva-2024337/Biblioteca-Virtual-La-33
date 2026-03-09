@@ -2,7 +2,6 @@ const File = require("../models/file");
 const axios = require("axios");
 
 const uploadFile = async (req, res) => {
-
   try {
 
     const { title, description, subject } = req.body;
@@ -12,31 +11,39 @@ const uploadFile = async (req, res) => {
       description,
       subject,
       fileUrl: req.file.path,
-      uploadedBy: req.headers["user-id"]
+      uploadedBy: req.body.uploadedBy || "test-user"
     });
 
-    // enviar archivo al AI service
     try {
-      await axios.post("http://ai-service:3003/analyze", {
-        fileId: file._id,
-        path: file.fileUrl
-      });
+
+      await axios.post(
+        "http://localhost:3001/IA-OCR-Service/v1/pipeline/process-file",
+        {
+          fileId: file._id,
+          uploadedBy: file.uploadedBy,
+          fileURL: file.fileUrl
+        }
+      );
+
     } catch (error) {
-      console.log("AI service not available");
+
+      console.log("AI service error:", error.message);
+
     }
 
     res.json(file);
 
   } catch (error) {
-    res.status(500).json(error);
-  }
 
+    console.error(error);
+    res.status(500).json(error);
+
+  }
 };
 
 const getFiles = async (req, res) => {
 
   const files = await File.find().populate("subject");
-
   res.json(files);
 
 };

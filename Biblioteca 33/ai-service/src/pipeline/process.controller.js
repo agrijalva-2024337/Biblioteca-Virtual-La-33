@@ -22,6 +22,13 @@ export const processFromURL = async (req, res, next) => {
 export const processTestUpload = async (req, res, next) => {
   try {
 
+    if (!req.file) {
+      return res.status(400).json({
+        success: false,
+        message: "Archivo es requerido"
+      });
+    }
+
     const filePath = req.file.path;
 
     const result = await processLocalFile({

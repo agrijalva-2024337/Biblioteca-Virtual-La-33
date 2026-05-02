@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7sIl3z9/fr0=",
+  "dgSpecHash": "6aLsdedkgDs=",
   "success": true,
-  "projectFilePath": "C:\\Users\\useri\\OneDrive\\Documents\\Angel Grijalva\\Biblioteca\\auth-service\\src\\AuthService.Domain\\AuthService.Domain.csproj",
+  "projectFilePath": "C:\\Users\\useri\\OneDrive\\Documents\\Biblioteca-la-33\\Biblioteca-Virtual-La-33\\Biblioteca 33\\auth-service\\SRC\\AuthService.Domain\\AuthService.Domain.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\useri\\.nuget\\packages\\system.componentmodel.annotations\\5.0.0\\system.componentmodel.annotations.5.0.0.nupkg.sha512"
   ],

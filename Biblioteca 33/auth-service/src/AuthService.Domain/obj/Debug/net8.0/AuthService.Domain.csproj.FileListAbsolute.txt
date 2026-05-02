@@ -45,3 +45,15 @@ C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\Aut
 C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Domain\obj\Debug\net8.0\refint\AuthService.Domain.dll
 C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.pdb
 C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Domain\obj\Debug\net8.0\ref\AuthService.Domain.dll
+C:\Users\useri\OneDrive\Documents\Biblioteca-la-33\Biblioteca-Virtual-La-33\Biblioteca 33\auth-service\src\AuthService.Domain\bin\Debug\net8.0\AuthService.Domain.deps.json
+C:\Users\useri\OneDrive\Documents\Biblioteca-la-33\Biblioteca-Virtual-La-33\Biblioteca 33\auth-service\SRC\AuthService.Domain\bin\Debug\net8.0\AuthService.Domain.dll
+C:\Users\useri\OneDrive\Documents\Biblioteca-la-33\Biblioteca-Virtual-La-33\Biblioteca 33\auth-service\SRC\AuthService.Domain\bin\Debug\net8.0\AuthService.Domain.pdb
+C:\Users\useri\OneDrive\Documents\Biblioteca-la-33\Biblioteca-Virtual-La-33\Biblioteca 33\auth-service\SRC\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\useri\OneDrive\Documents\Biblioteca-la-33\Biblioteca-Virtual-La-33\Biblioteca 33\auth-service\SRC\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.AssemblyInfoInputs.cache
+C:\Users\useri\OneDrive\Documents\Biblioteca-la-33\Biblioteca-Virtual-La-33\Biblioteca 33\auth-service\SRC\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.AssemblyInfo.cs
+C:\Users\useri\OneDrive\Documents\Biblioteca-la-33\Biblioteca-Virtual-La-33\Biblioteca 33\auth-service\SRC\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.csproj.CoreCompileInputs.cache
+C:\Users\useri\OneDrive\Documents\Biblioteca-la-33\Biblioteca-Virtual-La-33\Biblioteca 33\auth-service\SRC\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.sourcelink.json
+C:\Users\useri\OneDrive\Documents\Biblioteca-la-33\Biblioteca-Virtual-La-33\Biblioteca 33\auth-service\SRC\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.dll
+C:\Users\useri\OneDrive\Documents\Biblioteca-la-33\Biblioteca-Virtual-La-33\Biblioteca 33\auth-service\SRC\AuthService.Domain\obj\Debug\net8.0\refint\AuthService.Domain.dll
+C:\Users\useri\OneDrive\Documents\Biblioteca-la-33\Biblioteca-Virtual-La-33\Biblioteca 33\auth-service\SRC\AuthService.Domain\obj\Debug\net8.0\AuthService.Domain.pdb
+C:\Users\useri\OneDrive\Documents\Biblioteca-la-33\Biblioteca-Virtual-La-33\Biblioteca 33\auth-service\src\AuthService.Domain\obj\Debug\net8.0\ref\AuthService.Domain.dll

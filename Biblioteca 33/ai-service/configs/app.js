@@ -8,6 +8,8 @@ import { helmetOptions } from './helmet.configuration.js';
 import { requestLimit } from './rateLimit.configuration.js';
 import { errorHandler } from '../middlewares/handle-errors.js';
 import processRoutes from "../src/pipeline/process.routes.js";
+import swaggerUi from 'swagger-ui-express';
+import swaggerSpec from '../swagger.js';
 
 const BASE_PATH = '/IA-OCR-Service/v1';
 
@@ -20,6 +22,13 @@ const middlewares = (app) => {
 };
 
 const routes = (app) => {
+
+    app.use(
+    `${BASE_PATH}/docs`,
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerSpec)
+    );
+
     app.use(`${BASE_PATH}/pipeline`, processRoutes);
     app.get(`${BASE_PATH}/health`, (req, res) =>{
         res.status(200).json({
@@ -46,7 +55,7 @@ export const initServer = async() => {
         routes(app);
         app.use(errorHandler);
         app.listen(PORT, () => {
-            console.log(`Moderation server running on port: ${PORT}`)
+            console.log(`IA OCR server running on port: ${PORT}`)
             console.log(`Health check: http://localhost:${PORT}${BASE_PATH}/health`)
         });
     }catch(err){

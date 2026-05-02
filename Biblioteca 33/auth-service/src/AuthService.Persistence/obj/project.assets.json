@@ -3708,11 +3708,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\useri\\OneDrive\\Documents\\Angel Grijalva\\Biblioteca\\auth-service\\src\\AuthService.Persistence\\AuthService.Persistence.csproj",
+      "projectUniqueName": "C:\\Users\\useri\\OneDrive\\Documents\\Biblioteca-la-33\\Biblioteca-Virtual-La-33\\Biblioteca 33\\auth-service\\SRC\\AuthService.Persistence\\AuthService.Persistence.csproj",
       "projectName": "AuthService.Persistence",
-      "projectPath": "C:\\Users\\useri\\OneDrive\\Documents\\Angel Grijalva\\Biblioteca\\auth-service\\src\\AuthService.Persistence\\AuthService.Persistence.csproj",
+      "projectPath": "C:\\Users\\useri\\OneDrive\\Documents\\Biblioteca-la-33\\Biblioteca-Virtual-La-33\\Biblioteca 33\\auth-service\\SRC\\AuthService.Persistence\\AuthService.Persistence.csproj",
       "packagesPath": "C:\\Users\\useri\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\useri\\OneDrive\\Documents\\Angel Grijalva\\Biblioteca\\auth-service\\src\\AuthService.Persistence\\obj\\",
+      "outputPath": "C:\\Users\\useri\\OneDrive\\Documents\\Biblioteca-la-33\\Biblioteca-Virtual-La-33\\Biblioteca 33\\auth-service\\SRC\\AuthService.Persistence\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\useri\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -3727,11 +3727,11 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\Users\\useri\\OneDrive\\Documents\\Angel Grijalva\\Biblioteca\\auth-service\\src\\AuthService.Application\\AuthService.Application.csproj": {
-              "projectPath": "C:\\Users\\useri\\OneDrive\\Documents\\Angel Grijalva\\Biblioteca\\auth-service\\src\\AuthService.Application\\AuthService.Application.csproj"
+            "C:\\Users\\useri\\OneDrive\\Documents\\Biblioteca-la-33\\Biblioteca-Virtual-La-33\\Biblioteca 33\\auth-service\\SRC\\AuthService.Application\\AuthService.Application.csproj": {
+              "projectPath": "C:\\Users\\useri\\OneDrive\\Documents\\Biblioteca-la-33\\Biblioteca-Virtual-La-33\\Biblioteca 33\\auth-service\\SRC\\AuthService.Application\\AuthService.Application.csproj"
             },
-            "C:\\Users\\useri\\OneDrive\\Documents\\Angel Grijalva\\Biblioteca\\auth-service\\src\\AuthService.Domain\\AuthService.Domain.csproj": {
-              "projectPath": "C:\\Users\\useri\\OneDrive\\Documents\\Angel Grijalva\\Biblioteca\\auth-service\\src\\AuthService.Domain\\AuthService.Domain.csproj"
+            "C:\\Users\\useri\\OneDrive\\Documents\\Biblioteca-la-33\\Biblioteca-Virtual-La-33\\Biblioteca 33\\auth-service\\SRC\\AuthService.Domain\\AuthService.Domain.csproj": {
+              "projectPath": "C:\\Users\\useri\\OneDrive\\Documents\\Biblioteca-la-33\\Biblioteca-Virtual-La-33\\Biblioteca 33\\auth-service\\SRC\\AuthService.Domain\\AuthService.Domain.csproj"
             }
           }
         }

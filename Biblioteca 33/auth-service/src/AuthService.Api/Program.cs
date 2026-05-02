@@ -10,49 +10,55 @@ using Microsoft.AspNetCore.Hosting.Server.Features;
 var builder = WebApplication.CreateBuilder(args);
 
 // CORRECCIÓN: Omitir validación SSL (Cloudinary, etc.)
-System.Net.ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => true;
+System.Net.ServicePointManager.ServerCertificateValidationCallback +=
+    (sender, certificate, chain, sslPolicyErrors) => true;
 
-// Configure Serilog from appsettings.json only (avoid duplicate sinks)
+// Serilog
 builder.Host.UseSerilog((context, services, loggerConfiguration) =>
     loggerConfiguration
         .ReadFrom.Configuration(context.Configuration)
         .ReadFrom.Services(services));
 
-// Add services to the container
+// Controllers
 builder.Services.AddControllers(options =>
 {
-    // Agregar el enlazador de modelos para IFileData
     options.ModelBinderProviders.Insert(0, new FileDataModelBinderProvider());
 })
 .AddJsonOptions(o =>
 {
-    // Estandarizar respuestas en camelCase para coincidir con auth-node
-    o.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase;
+    o.JsonSerializerOptions.PropertyNamingPolicy =
+        System.Text.Json.JsonNamingPolicy.CamelCase;
 });
 
-// Configure services through extension methods
+// Services
 builder.Services.AddApiDocumentation();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddJwtAuthentication(builder.Configuration);
 builder.Services.AddRateLimitingPolicies();
-
-// Add security services
 builder.Services.AddSecurityPolicies(builder.Configuration);
 builder.Services.AddSecurityOptions();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline
+// =========================
+// PIPELINE
+// =========================
+
+// Swagger (IMPORTANTE: antes de auth middleware no es obligatorio, pero mejor aquí)
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "AuthService");
+        c.RoutePrefix = "swagger"; // URL: /swagger
+    });
 }
 
-// Add Serilog request logging
+// Logs
 app.UseSerilogRequestLogging();
 
-// Add Security Headers using NetEscapades package
+// Security headers
 app.UseSecurityHeaders(policies => policies
     .AddDefaultSecurityHeaders()
     .RemoveServerHeader()
@@ -76,20 +82,24 @@ app.UseSecurityHeaders(policies => policies
     .AddCustomHeader("Cache-Control", "no-store, no-cache, must-revalidate, private")
 );
 
-// Manejo global de excepciones
+// Exception middleware
 app.UseMiddleware<GlobalExceptionMiddleware>();
 
-// Middlewares principales
+// Core middlewares
 app.UseHttpsRedirection();
 app.UseCors("DefaultCorsPolicy");
 app.UseRateLimiter();
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
 
-// Log de inicio: direcciones y endpoint de salud
+// =========================
+// LOG STARTUP
+// =========================
 var startupLogger = app.Services.GetRequiredService<ILogger<Program>>();
+
 app.Lifetime.ApplicationStarted.Register(() =>
 {
     try
@@ -103,21 +113,21 @@ app.Lifetime.ApplicationStarted.Register(() =>
             foreach (var addr in addresses)
             {
                 var health = $"{addr.TrimEnd('/')}/api/v1/health";
-                startupLogger.LogInformation("API de AuthService está ejecutándose en {Url}. Endpoint de salud: {HealthUrl}", addr, health);
+                startupLogger.LogInformation(
+                    "API de AuthService está ejecutándose en {Url}. Health: {HealthUrl}",
+                    addr, health);
             }
-        }
-        else
-        {
-            startupLogger.LogInformation("API de AuthService iniciada. Endpoint de salud: /api/v1/health");
         }
     }
     catch (Exception ex)
     {
-        startupLogger.LogWarning(ex, "Fallo al determinar las direcciones de escucha para el log de inicio");
+        startupLogger.LogWarning(ex, "Error obteniendo URLs de inicio");
     }
 });
 
-// Inicializar base de datos y datos semilla
+// =========================
+// DB INIT
+// =========================
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
@@ -127,18 +137,18 @@ using (var scope = app.Services.CreateScope())
     {
         logger.LogInformation("Verificando conexión a la base de datos...");
 
-        // Garantizar que la base de datos se crea (similar a Sequelize sync en Node.js)
         await context.Database.EnsureCreatedAsync();
 
-        logger.LogInformation("Base de datos lista. Ejecutando datos semilla...");
+        logger.LogInformation("Base de datos lista. Ejecutando seed...");
+
         await DataSeeder.SeedAsync(context);
 
-        logger.LogInformation("Inicialización de base de datos completada exitosamente");
+        logger.LogInformation("Inicialización completada");
     }
     catch (Exception ex)
     {
-        logger.LogError(ex, "Ocurrió un error al inicializar la base de datos");
-        throw; // Relanzar para detener la aplicación
+        logger.LogError(ex, "Error inicializando base de datos");
+        throw;
     }
 }
 

@@ -16,6 +16,6 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = AuthService.Persistence
-build_property.ProjectDir = C:\Users\useri\OneDrive\Documents\Angel Grijalva\Biblioteca\auth-service\src\AuthService.Persistence\
+build_property.ProjectDir = C:\Users\useri\OneDrive\Documents\Biblioteca-la-33\Biblioteca-Virtual-La-33\Biblioteca 33\auth-service\SRC\AuthService.Persistence\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

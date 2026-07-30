@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { processFromURL, processTestUpload } from "./process.controller.js";
 import { uploadTestFile } from "../../middlewares/file-upload.js";
+import { validateInternalKey } from "../../../shared/middlewares/internal-auth.middleware.js";
 
 const router = Router();
 
@@ -34,7 +35,7 @@ const router = Router();
  *       200:
  *         description: Archivo procesado correctamente
  */
-router.post("/process-file", processFromURL);
+router.post("/process-file", validateInternalKey, processFromURL);
 
 /**
  * @swagger
@@ -56,10 +57,15 @@ router.post("/process-file", processFromURL);
  *       200:
  *         description: Archivo procesado correctamente
  */
-router.post(
-  "/test-upload",
-  uploadTestFile.single("file"),
-  processTestUpload
-);
+// Endpoint de prueba/desarrollo: solo se registra fuera de produccion.
+// En produccion no existe la ruta, por lo que cualquier request cae en el
+// manejador de "ruta no encontrada" (404), sin revelar que existia.
+if (process.env.NODE_ENV !== "production") {
+  router.post(
+    "/test-upload",
+    uploadTestFile.single("file"),
+    processTestUpload
+  );
+}
 
 export default router;

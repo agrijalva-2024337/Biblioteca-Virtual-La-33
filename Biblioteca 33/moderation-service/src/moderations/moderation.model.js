@@ -14,15 +14,43 @@ const moderationSchema = new Schema(
       type: String,
       required: [true, 'El ID del usuario que sube el archivo es requerido'],
     },
+    /**
+     * ID de Subject (files-service) como String plano.
+     * Permite filtrar la cola de moderación por materias del docente.
+     */
+    subjectId: {
+      type: String,
+      trim: true,
+      index: true,
+    },
     fileURL: {
       type: String,
       required: [true, 'La URL del archivo es requerida'],
       trim: true,
     },
+    title: {
+      type: String,
+      trim: true,
+    },
+    originalName: {
+      type: String,
+      trim: true,
+    },
+    sizeBytes: {
+      type: Number,
+    },
     aiScore: {
     type: Number,
     min: 0,
     max: 1
+    },
+    aiClassification: {
+      type: String,
+      trim: true,
+    },
+    aiReason: {
+      type: String,
+      trim: true,
     },
     status: {
       type: String,

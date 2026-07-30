@@ -7,7 +7,7 @@ import helmet from 'helmet';
 import { dbConnection } from './db.js';
 import { corsOptions } from './cors.configuration.js';
 import { helmetOptions } from './helmet.configuration.js';
-import { errorHandler } from '../middlewares/handle-errors.js';
+import { errorHandler } from '../../shared/utils/responseFormatter.js';
 import notificationRoutes from '../src/notifications/notification.routes.js';
 
 const BASE_PATH = '/Biblioteca/v1';

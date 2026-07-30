@@ -1,11 +1,12 @@
-const express = require("express");
-
-const router = express.Router();
-
-const {
+import express from "express";
+import { validateJWT } from "../../../shared/middlewares/jwt.middleware.js";
+import { validateCreateComment } from "../middlewares/comment-validator.js";
+import {
   addComment,
   getComments
-} = require("../controllers/comment-controller");
+} from "../controllers/comment-controller.js";
+
+const router = express.Router();
 
 /**
  * @openapi
@@ -29,7 +30,7 @@ const {
  *       200:
  *         description: Comentario creado
  */
-router.post("/", addComment);
+router.post("/", validateJWT, validateCreateComment, addComment);
 
 /**
  * @openapi
@@ -47,6 +48,6 @@ router.post("/", addComment);
  *       200:
  *         description: Lista de comentarios
  */
-router.get("/:fileId", getComments);
+router.get("/:fileId", validateJWT, getComments);
 
-module.exports = router;
+export default router;

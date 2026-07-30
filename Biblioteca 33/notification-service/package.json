@@ -1,0 +1,29 @@
+{
+  "name": "notifications-service",
+  "version": "1.0.0",
+  "description": "Servicio de notificaciones (emails transaccionales + notificaciones in-app) para Biblioteca la 33",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "La 33",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.2.4",
+    "express": "^5.2.1",
+    "express-validator": "^7.3.1",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.1.6",
+    "morgan": "^1.10.1",
+    "nodemailer": "^6.9.16"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}

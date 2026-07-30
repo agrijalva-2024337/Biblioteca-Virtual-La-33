@@ -9,4 +9,7 @@ public class LoginDto
 
     [Required]
     public string Password { get; set; } = string.Empty;
+
+    /// <summary>Token de Google reCAPTCHA v2 (checkbox).</summary>
+    public string? CaptchaToken { get; set; }
 }

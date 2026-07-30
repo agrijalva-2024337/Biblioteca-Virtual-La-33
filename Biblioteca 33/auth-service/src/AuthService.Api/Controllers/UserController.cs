@@ -19,6 +19,62 @@ public class UsersController(IUserManagementService userManagementService) : Con
         return roles.Contains(RoleConstants.ADMIN_ROLE);
     }
 
+    [HttpGet]
+    [Authorize]
+    [EnableRateLimiting("ApiPolicy")]
+    public async Task<ActionResult<IReadOnlyList<UserResponseDto>>> GetAllUsers()
+    {
+        if (!await CurrentUserIsAdmin())
+        {
+            return StatusCode(403, new { success = false, message = "Forbidden" });
+        }
+
+        var users = await userManagementService.GetAllUsersAsync();
+        return Ok(users);
+    }
+
+    [HttpPost]
+    [Authorize]
+    [EnableRateLimiting("ApiPolicy")]
+    public async Task<ActionResult<UserResponseDto>> CreateUser([FromBody] CreateUserDto dto)
+    {
+        if (!await CurrentUserIsAdmin())
+        {
+            return StatusCode(403, new { success = false, message = "Forbidden" });
+        }
+
+        var result = await userManagementService.CreateUserAsync(dto);
+        return StatusCode(201, result);
+    }
+
+    [HttpPut("{userId}")]
+    [Authorize]
+    [EnableRateLimiting("ApiPolicy")]
+    public async Task<ActionResult<UserResponseDto>> UpdateUserDetails(string userId, [FromBody] UpdateUserDetailsDto dto)
+    {
+        if (!await CurrentUserIsAdmin())
+        {
+            return StatusCode(403, new { success = false, message = "Forbidden" });
+        }
+
+        var result = await userManagementService.UpdateUserDetailsAsync(userId, dto);
+        return Ok(result);
+    }
+
+    [HttpPatch("{userId}/status")]
+    [Authorize]
+    [EnableRateLimiting("ApiPolicy")]
+    public async Task<ActionResult<UserResponseDto>> ToggleUserStatus(string userId, [FromBody] ToggleUserStatusDto dto)
+    {
+        if (!await CurrentUserIsAdmin())
+        {
+            return StatusCode(403, new { success = false, message = "Forbidden" });
+        }
+
+        var result = await userManagementService.ToggleUserStatusAsync(userId, dto.Activate);
+        return Ok(result);
+    }
+
     [HttpPut("{userId}/role")]
     [Authorize]
     [EnableRateLimiting("ApiPolicy")]
@@ -40,7 +96,7 @@ public class UsersController(IUserManagementService userManagementService) : Con
         var roles = await userManagementService.GetUserRolesAsync(userId);
         return Ok(roles);
     }
-    
+
     [HttpGet("by-role/{roleName}")]
     [Authorize]
     [EnableRateLimiting("ApiPolicy")]

@@ -1,28 +1,37 @@
-const Comment = require("../models/comment");
+import Comment from "../models/comment.js";
 
-const addComment = async (req, res) => {
+export const addComment = async (req, res, next) => {
+  try {
 
-  const { fileId, text } = req.body;
+    const { fileId, text } = req.body;
 
-  const comment = await Comment.create({
-    fileId,
-    user: req.headers["user-id"],
-    text
-  });
+    const comment = await Comment.create({
+      fileId,
+      user: req.user.id,
+      text
+    });
 
-  res.json(comment);
+    res.json(comment);
+
+  } catch (error) {
+
+    next(error);
+
+  }
 };
 
-const getComments = async (req, res) => {
+export const getComments = async (req, res, next) => {
+  try {
 
-  const comments = await Comment.find({
-    fileId: req.params.fileId
-  });
+    const comments = await Comment.find({
+      fileId: req.params.fileId
+    });
 
-  res.json(comments);
-};
+    res.json(comments);
 
-module.exports = {
-  addComment,
-  getComments
+  } catch (error) {
+
+    next(error);
+
+  }
 };

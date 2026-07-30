@@ -79,5 +79,50 @@ public static class DataSeeder
                 await context.SaveChangesAsync();
             }
         }
+
+        if (!await context.Users.AnyAsync(u => u.Username == "docente"))
+        {
+            var teacherRole = await context.Roles.FirstOrDefaultAsync(r => r.Name == RoleConstants.TEACHER_ROLE);
+            if (teacherRole != null)
+            {
+                var passwordHasher = new PasswordHashService();
+                var userId = UuidGenerator.GenerateUserId();
+                var emailId = UuidGenerator.GenerateUserId();
+                var userRoleId = UuidGenerator.GenerateUserId();
+
+                var teacherUser = new User
+                {
+                    Id = userId,
+                    Name = "Docente",
+                    Surname = "Demo",
+                    Username = "docente",
+                    Email = "docente@local.com",
+                    Password = passwordHasher.HashPassword("biblioteca!"),
+                    Status = true,
+
+                    UserEmail = new UserEmail
+                    {
+                        Id = emailId,
+                        UserId = userId,
+                        EmailVerified = true,
+                        EmailVerificationToken = null,
+                        EmailVerificationTokenExpiry = null
+                    },
+
+                    UserRoles =
+                    [
+                        new UserRole
+                        {
+                            Id = userRoleId,
+                            UserId = userId,
+                            RoleId = teacherRole.Id
+                        }
+                    ]
+                };
+
+                await context.Users.AddAsync(teacherUser);
+                await context.SaveChangesAsync();
+            }
+        }
     }
 }

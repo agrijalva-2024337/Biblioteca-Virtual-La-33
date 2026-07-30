@@ -195,6 +195,11 @@ namespace AuthService.Persistence.Migrations
                         .HasColumnType("character varying(16)")
                         .HasColumnName("id");
 
+                    b.Property<string>("Grade")
+                        .HasMaxLength(80)
+                        .HasColumnType("character varying(80)")
+                        .HasColumnName("grade");
+
                     b.Property<string>("Phone")
                         .IsRequired()
                         .HasMaxLength(8)

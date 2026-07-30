@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "Biblioteca La 33",
+    "slug": "client-user",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "scheme": "biblioteca33",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#1c150f"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.la33.biblioteca.user"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#1c150f"
+      },
+      "package": "com.la33.biblioteca.user",
+      "usesCleartextTraffic": true
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-sharing"
+    ]
+  }
+}

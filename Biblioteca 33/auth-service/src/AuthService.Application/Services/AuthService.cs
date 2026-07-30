@@ -18,11 +18,25 @@ public class AuthService(
     IPasswordHashService passwordHashService,
     IJwtTokenService jwtTokenService,
     IEmailService emailService,
+    IRecaptchaService recaptchaService,
     IConfiguration configuration,
     ILogger<AuthService> logger) : IAuthService
 {
+    private async Task EnsureCaptchaAsync(string? captchaToken)
+    {
+        var ok = await recaptchaService.VerifyAsync(captchaToken);
+        if (!ok)
+        {
+            throw new BusinessException(
+                ErrorCodes.CAPTCHA_INVALID,
+                "Verificación CAPTCHA inválida o ausente. Completa el desafío e inténtalo de nuevo.");
+        }
+    }
+
     public async Task<RegisterResponseDto> RegisterAsync(RegisterDto registerDto)
     {
+        await EnsureCaptchaAsync(registerDto.CaptchaToken);
+
         // Verificar si el email ya existe
         if (await userRepository.ExistsByEmailAsync(registerDto.Email))
         {
@@ -66,7 +80,7 @@ public class AuthService(
             {
                 Id = userEmailId,
                 UserId = userId,
-                EmailVerified = true,
+                EmailVerified = false,
                 EmailVerificationToken = emailVerificationToken,
                 EmailVerificationTokenExpiry = DateTime.UtcNow.AddHours(24)
             },
@@ -91,7 +105,10 @@ public class AuthService(
             {
                 Id = userProfileId,
                 UserId = userId,
-                Phone = registerDto.Phone
+                Phone = registerDto.Phone,
+                Grade = string.IsNullOrWhiteSpace(registerDto.Grade)
+                    ? null
+                    : registerDto.Grade.Trim()
             }
         };
 
@@ -126,6 +143,8 @@ public class AuthService(
 
     public async Task<AuthResponseDto> LoginAsync(LoginDto loginDto)
     {
+        await EnsureCaptchaAsync(loginDto.CaptchaToken);
+
         // Buscar usuario por email o username
         User? user = null;
 
@@ -159,6 +178,15 @@ public class AuthService(
         {
             logger.LogFailedLoginAttempt();
             throw new UnauthorizedAccessException("Invalid credentials");
+        }
+
+        // No emitir JWT hasta que el correo esté verificado
+        if (user.UserEmail is null || !user.UserEmail.EmailVerified)
+        {
+            logger.LogFailedLoginAttempt();
+            throw new BusinessException(
+                ErrorCodes.EMAIL_NOT_VERIFIED,
+                "Debes verificar tu correo antes de iniciar sesión. Revisa tu bandeja de entrada o reenvía el enlace de verificación.");
         }
 
         logger.LogUserLoggedIn();
@@ -195,7 +223,8 @@ public class AuthService(
             CreatedAt = user.CreatedAt,
             UpdatedAt = user.UpdatedAt,
             // ✅ Agregar teléfono en la respuesta si existe
-            Phone = user.UserProfile?.Phone ?? string.Empty
+            Phone = user.UserProfile?.Phone ?? string.Empty,
+            Grade = user.UserProfile?.Grade
         };
     }
 
@@ -205,7 +234,8 @@ public class AuthService(
         {
             Id = user.Id,
             Username = user.Username,
-            Role = user.UserRoles.FirstOrDefault()?.Role?.Name ?? RoleConstants.USER_ROLE
+            Role = user.UserRoles.FirstOrDefault()?.Role?.Name ?? RoleConstants.USER_ROLE,
+            Grade = user.UserProfile?.Grade
         };
     }
 
@@ -217,7 +247,21 @@ public class AuthService(
             return new EmailResponseDto
             {
                 Success = false,
-                Message = "Invalid or expired verification token"
+                Message = "Token de verificación inválido o expirado"
+            };
+        }
+
+        if (user.UserEmail.EmailVerified)
+        {
+            return new EmailResponseDto
+            {
+                Success = true,
+                Message = "El correo ya estaba verificado",
+                Data = new
+                {
+                    email = user.Email,
+                    verified = true
+                }
             };
         }
 
@@ -307,6 +351,8 @@ public class AuthService(
 
     public async Task<EmailResponseDto> ForgotPasswordAsync(ForgotPasswordDto forgotPasswordDto)
     {
+        await EnsureCaptchaAsync(forgotPasswordDto.CaptchaToken);
+
         var user = await userRepository.GetByEmailAsync(forgotPasswordDto.Email);
         if (user == null)
         {
@@ -397,5 +443,54 @@ public class AuthService(
         }
 
         return MapToUserResponseDto(user);
+    }
+
+    public async Task<UserResponseDto> UpdateOwnProfileAsync(string userId, UpdateOwnProfileDto dto)
+    {
+        if (string.IsNullOrWhiteSpace(userId))
+        {
+            throw new ArgumentException("Invalid userId", nameof(userId));
+        }
+
+        var hasName = !string.IsNullOrWhiteSpace(dto.Name);
+        var hasSurname = !string.IsNullOrWhiteSpace(dto.Surname);
+        var hasPhone = !string.IsNullOrWhiteSpace(dto.Phone);
+
+        if (!hasName && !hasSurname && !hasPhone)
+        {
+            throw new ArgumentException("At least one field must be provided to update profile");
+        }
+
+        var user = await userRepository.GetByIdAsync(userId);
+
+        if (hasName)
+        {
+            user.Name = dto.Name!.Trim();
+        }
+
+        if (hasSurname)
+        {
+            user.Surname = dto.Surname!.Trim();
+        }
+
+        if (hasPhone)
+        {
+            if (user.UserProfile == null)
+            {
+                user.UserProfile = new UserProfile
+                {
+                    Id = UuidGenerator.GenerateUserId(),
+                    UserId = user.Id,
+                    Phone = dto.Phone!.Trim()
+                };
+            }
+            else
+            {
+                user.UserProfile.Phone = dto.Phone!.Trim();
+            }
+        }
+
+        var updatedUser = await userRepository.UpdateUserAsync(user);
+        return MapToUserResponseDto(updatedUser);
     }
 }

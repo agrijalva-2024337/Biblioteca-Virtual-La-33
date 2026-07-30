@@ -1,6 +1,5 @@
 import { body, param, query } from 'express-validator';
-import { validateJWT } from './validate-JWT.js';
-import { requireRole } from './validate-role.js';
+import { validateJWT, requireRole } from '../../shared/middlewares/jwt.middleware.js';
 import { checkValidators } from './check-validators.js';
 
 const TEMPLATES = ['welcome', 'verify-email', 'reset-password', 'generic'];
@@ -113,6 +112,37 @@ export const validateMarkAsRead = [
   param('id')
     .isMongoId()
     .withMessage('El ID debe ser un ObjectId válido'),
+
+  checkValidators,
+];
+
+/**
+ * Notificación interna de cambio de estado de archivo
+ * (la llaman ai-service y moderation-service vía x-internal-key, no usuarios finales)
+ */
+export const validateInternalFileStatus = [
+  body('userId')
+    .trim()
+    .notEmpty()
+    .withMessage('El userId es requerido'),
+
+  body('fileId')
+    .trim()
+    .notEmpty()
+    .withMessage('El fileId es requerido'),
+
+  body('status')
+    .notEmpty()
+    .withMessage('El status es requerido')
+    .isIn(['approved', 'rejected'])
+    .withMessage('El status debe ser approved o rejected'),
+
+  body('reason')
+    .optional({ checkFalsy: true })
+    .isString()
+    .withMessage('La razón debe ser texto')
+    .isLength({ max: 1000 })
+    .withMessage('La razón no puede exceder 1000 caracteres'),
 
   checkValidators,
 ];

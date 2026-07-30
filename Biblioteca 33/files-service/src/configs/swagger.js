@@ -1,4 +1,4 @@
-const swaggerJSDoc = require("swagger-jsdoc");
+import swaggerJSDoc from "swagger-jsdoc";
 
 const options = {
   definition: {
@@ -10,7 +10,7 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:3002"
+        url: "http://localhost:3003"
       }
     ],
 
@@ -19,4 +19,4 @@ const options = {
   apis: ["src/routes/*.js"]
 };
 
-module.exports = swaggerJSDoc(options);
+export default swaggerJSDoc(options);

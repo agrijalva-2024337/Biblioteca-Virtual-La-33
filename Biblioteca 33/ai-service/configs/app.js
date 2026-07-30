@@ -6,7 +6,7 @@ import helmet from 'helmet';
 import { corsOptions } from './cors.configuration.js';
 import { helmetOptions } from './helmet.configuration.js';
 import { requestLimit } from './rateLimit.configuration.js';
-import { errorHandler } from '../middlewares/handle-errors.js';
+import { errorHandler } from '../../shared/utils/responseFormatter.js';
 import processRoutes from "../src/pipeline/process.routes.js";
 import swaggerUi from 'swagger-ui-express';
 import swaggerSpec from '../swagger.js';

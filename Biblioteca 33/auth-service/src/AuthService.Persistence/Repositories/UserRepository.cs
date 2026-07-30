@@ -77,14 +77,48 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
 
     public async Task<User> UpdateUserAsync(User user)
     {
-        // Entity is already tracked from GetByIdAsync, just save changes
+        // La entidad suele venir ya rastreada desde GetByIdAsync; SaveChanges persiste los cambios.
+        var entry = context.Entry(user);
+        if (entry.State == EntityState.Detached)
+        {
+            context.Users.Update(user);
+        }
+
         await context.SaveChangesAsync();
         return await GetByIdAsync(user.Id);
     }
 
     public async Task<bool> DeleteUserAsync(string id)
     {
-        var user = await GetByIdAsync(id);
+        var user = await context.Users
+            .Include(u => u.UserRoles)
+            .Include(u => u.UserEmail)
+            .Include(u => u.UserPasswordReset)
+            .Include(u => u.UserProfile)
+            .FirstOrDefaultAsync(u => u.Id == id);
+
+        if (user == null)
+        {
+            return false;
+        }
+
+        context.UserRoles.RemoveRange(user.UserRoles);
+
+        if (user.UserEmail != null)
+        {
+            context.UserEmails.Remove(user.UserEmail);
+        }
+
+        if (user.UserPasswordReset != null)
+        {
+            context.UserPasswordResets.Remove(user.UserPasswordReset);
+        }
+
+        if (user.UserProfile != null)
+        {
+            context.Set<UserProfile>().Remove(user.UserProfile);
+        }
+
         context.Users.Remove(user);
         await context.SaveChangesAsync();
         return true;
@@ -104,24 +138,33 @@ public class UserRepository(ApplicationDbContext context) : IUserRepository
 
     public async Task UpdateUserRoleAsync(string userId, string roleId)
     {
-        // Remove existing user-role associations
         var existingRoles = await context.UserRoles
             .Where(ur => ur.UserId == userId)
             .ToListAsync();
-        
+
         context.UserRoles.RemoveRange(existingRoles);
 
-        // Add new user-role association with the existing role
         var newUserRole = new UserRole
         {
-            Id = UuidGenerator.GenerateUserId(), // Generate ID for the UserRole entry (not the Role)
+            Id = UuidGenerator.GenerateUserId(),
             UserId = userId,
-            RoleId = roleId, // Use the existing role ID from the roles table
+            RoleId = roleId,
             CreatedAt = DateTime.UtcNow,
             UpdatedAt = DateTime.UtcNow
         };
-        
+
         context.UserRoles.Add(newUserRole);
         await context.SaveChangesAsync();
+    }
+
+    public async Task<IReadOnlyList<User>> GetAllAsync()
+    {
+        return await context.Users
+            .Include(u => u.UserProfile)
+            .Include(u => u.UserEmail)
+            .Include(u => u.UserRoles)
+                .ThenInclude(ur => ur.Role)
+            .OrderBy(u => u.Username)
+            .ToListAsync();
     }
 }

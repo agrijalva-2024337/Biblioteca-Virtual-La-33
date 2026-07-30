@@ -1,9 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-using AuthService.Application.Interfaces;
 
 namespace AuthService.Application.DTOs;
 
-public class RegisterDto
+public class CreateUserDto
 {
     [Required]
     [MaxLength(25)]
@@ -28,11 +27,6 @@ public class RegisterDto
     [StringLength(8, MinimumLength = 8)]
     public string Phone { get; set; } = string.Empty;
 
-    /// <summary>Grado del estudiante (name del catálogo Grade en files-service).</summary>
     [Required]
-    [MaxLength(80)]
-    public string Grade { get; set; } = string.Empty;
-
-    /// <summary>Token de Google reCAPTCHA v2 (checkbox).</summary>
-    public string? CaptchaToken { get; set; }
+    public string RoleName { get; set; } = string.Empty;
 }

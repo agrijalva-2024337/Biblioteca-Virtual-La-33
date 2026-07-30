@@ -35,7 +35,29 @@ public class AuthController(IAuthService authService) : ControllerBase
         });
     }
 
+    [HttpPut("profile")]
+    [Authorize]
+    [EnableRateLimiting("ApiPolicy")]
+    public async Task<ActionResult<object>> UpdateProfile([FromBody] UpdateOwnProfileDto dto)
+    {
+        var userIdClaim = User.Claims.FirstOrDefault(c => c.Type == "sub" || c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier");
+        if (userIdClaim == null || string.IsNullOrEmpty(userIdClaim.Value))
+        {
+            return Unauthorized();
+        }
+
+        var user = await authService.UpdateOwnProfileAsync(userIdClaim.Value, dto);
+
+        return Ok(new
+        {
+            success = true,
+            message = "Perfil actualizado exitosamente",
+            data = user
+        });
+    }
+
     [HttpPost("profile/by-id")]
+    [Authorize]
     [EnableRateLimiting("ApiPolicy")]
     public async Task<ActionResult<object>> GetProfileById([FromBody] GetProfileByIdDto request)
     {
@@ -46,6 +68,23 @@ public class AuthController(IAuthService authService) : ControllerBase
                 success = false,
                 message = "El userId es requerido"
             });
+        }
+
+        var callerId = User.Claims.FirstOrDefault(c =>
+            c.Type == "sub" ||
+            c.Type == "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier")?.Value;
+        var callerRole = User.Claims.FirstOrDefault(c =>
+            c.Type == "role" ||
+            c.Type == "http://schemas.microsoft.com/ws/2008/06/identity/claims/role")?.Value;
+
+        var isStaff =
+            string.Equals(callerRole, "ADMIN_ROLE", StringComparison.OrdinalIgnoreCase) ||
+            string.Equals(callerRole, "TEACHER_ROLE", StringComparison.OrdinalIgnoreCase);
+        var isSelf = string.Equals(callerId, request.UserId, StringComparison.OrdinalIgnoreCase);
+
+        if (!isStaff && !isSelf)
+        {
+            return Forbid();
         }
 
         var user = await authService.GetUserByIdAsync(request.UserId);

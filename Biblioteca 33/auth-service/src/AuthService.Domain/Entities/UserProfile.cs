@@ -17,5 +17,12 @@ public class UserProfile
     [RegularExpression(@"^\d{8}$", ErrorMessage = "El número de teléfono debe de contener solo números")]
     public string Phone { get; set; } = string.Empty;
 
+    /// <summary>
+    /// Grado del estudiante (Grade.name de files-service). Solo aplica a USER_ROLE.
+    /// Nullable para admin/docente y perfiles legacy.
+    /// </summary>
+    [MaxLength(80)]
+    public string? Grade { get; set; }
+
     public User User { get; set; } = null!;
 }

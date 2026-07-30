@@ -1,13 +1,15 @@
 import { body, param, query } from 'express-validator'
-import { validateJWT } from './validate-JWT.js'
-import { requireRole } from './validate-role.js';
+import { validateJWT, requireRole } from '../../shared/middlewares/jwt.middleware.js'
+import { validateInternalKey } from '../../shared/middlewares/internal-auth.middleware.js'
 import { checkValidators } from './check-validators.js'
 
 
-// Crear moderación (lo llama el servicio de IA)
+// Crear moderación (lo llama el servicio de IA con la API key interna)
 
 
 export const validateCreateModeration = [
+  validateInternalKey,
+
   body('fileId')
     .trim()
     .notEmpty()
@@ -19,10 +21,16 @@ export const validateCreateModeration = [
     .notEmpty()
     .withMessage('El usuario que sube el archivo es requerido'),
 
+  body('subjectId')
+    .optional({ values: 'falsy' })
+    .trim()
+    .notEmpty()
+    .withMessage('subjectId no puede estar vacío'),
+
   body('fileURL')
     .notEmpty()
     .withMessage('La URL del archivo es requerida')
-    .isURL()
+    .isURL({ require_tld: false, require_protocol: true })
     .withMessage('Debe ser una URL válida'),
 
   body('aiScore')
@@ -38,7 +46,7 @@ export const validateCreateModeration = [
 
 export const validateGetModerationById = [
   validateJWT,
-  requireRole('ADMIN_ROLE'),
+  requireRole('ADMIN_ROLE', 'TEACHER_ROLE'),
   param('id')
     .isMongoId()
     .withMessage('El ID debe ser un ObjectId válido'),
@@ -51,7 +59,7 @@ export const validateGetModerationById = [
 
 export const validateApproveModeration = [
   validateJWT,
-  requireRole('ADMIN_ROLE'),
+  requireRole('ADMIN_ROLE', 'TEACHER_ROLE'),
   param('id')
     .isMongoId()
     .withMessage('El ID debe ser un ObjectId válido'),
@@ -64,7 +72,7 @@ export const validateApproveModeration = [
 
 export const validateRejectModeration = [
   validateJWT,
-  requireRole('ADMIN_ROLE'),
+  requireRole('ADMIN_ROLE', 'TEACHER_ROLE'),
   param('id')
     .isMongoId()
     .withMessage('El ID debe ser un ObjectId válido'),
@@ -83,6 +91,8 @@ export const validateRejectModeration = [
 // Obtener moderaciones con filtros
 
 export const validateGetModerations = [
+  validateJWT,
+  requireRole('ADMIN_ROLE', 'TEACHER_ROLE'),
 
   query('page')
     .optional()

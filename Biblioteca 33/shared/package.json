@@ -1,0 +1,11 @@
+{
+  "name": "@biblioteca-la33/shared",
+  "version": "1.0.0",
+  "description": "Middlewares y utilidades compartidas entre los microservicios Node de Biblioteca la 33",
+  "type": "module",
+  "main": "middlewares/jwt.middleware.js",
+  "license": "ISC",
+  "dependencies": {
+    "jsonwebtoken": "^9.0.3"
+  }
+}

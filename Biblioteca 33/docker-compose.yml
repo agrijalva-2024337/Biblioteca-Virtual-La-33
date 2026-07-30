@@ -12,5 +12,15 @@ services:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
 
+  mongo:
+    image: mongo:6
+    container_name: biblioteca_mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: unless-stopped
+
 volumes:
-  postgres_data:s
+  postgres_data:
+  mongo_data:

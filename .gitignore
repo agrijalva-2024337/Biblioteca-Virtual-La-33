@@ -1,1 +1,7 @@
 .env
+git rm -r --cached "Biblioteca 33/ai-service/node_modules"
+git rm -r --cached "Biblioteca 33/moderation-service/node_modules"
+git rm -r --cached "Biblioteca 33/notification-service/node_modules"
+git add .gitignore
+git commit -m "fix: ignore node_modules, evita romper el build en Railway"
+git push
